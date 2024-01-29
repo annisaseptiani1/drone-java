@@ -1,0 +1,33 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: java-test
+    pull: if-not-exists
+    image: maven:3-jdk-10
+    commands:
+      - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+      - mvn test -B
+
+  - name: java-build
+    pull: if-not-exists
+    image: docker.io/maven:3.8.5-jdk-11-slim
+    commands:
+      - mvn -DskipTests -pl $MAVEN_MODULE clean install
+
+  - name: docker
+    pull: if-not-exists
+    image: plugins/docker
+    settings:
+      # registry: docker.io
+      repo: annisaseptiani/drone-test
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+      tags:
+        - latest
+
+trigger:
+  branch:
+    - main
