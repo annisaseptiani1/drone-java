@@ -10,7 +10,7 @@ steps:
 
   - name: java-unit-test
     pull: if-not-exists
-    image: docker.io/maven:3.8.4-openjdk-17
+    image: maven:3.8.4-openjdk-17
     commands:
       - mvn jacoco:prepare-agent@preTest surefire:test jacoco:report@postTest
 
