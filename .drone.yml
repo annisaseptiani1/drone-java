@@ -2,18 +2,23 @@ kind: pipeline
 name: default
 
 steps:
-  - name: java-test
+  - name: java-build
     pull: if-not-exists
     image: maven:3.8.4-openjdk-17
     commands:
-      - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-      - mvn test -B
+      - mvn -DskipTests=true clean verify
 
-  - name: java-build
+  - name: java-unit-test
     pull: if-not-exists
     image: docker.io/maven:3.8.4-openjdk-17
     commands:
-      - mvn -DskipTests -pl $MAVEN_MODULE clean install
+      - mvn jacoco:prepare-agent@preTest surefire:test jacoco:report@postTest
+
+  - name: java-integration-test
+    pull: if-not-exists
+    image: docker.io/maven:3.8.4-openjdk-17
+    commands:
+      - mvn jacoco:prepare-agent-integration@preIT failsafe:integration-test jacoco:report-integration@postIT failsafe:verify
 
   - name: docker
     pull: if-not-exists
