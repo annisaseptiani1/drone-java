@@ -11,7 +11,7 @@ steps:
 
   - name: java-build
     pull: if-not-exists
-    image: docker.io/maven:3.8.4-openjdk-17
+    image: maven:3.8.4-openjdk-17
     commands:
       - mvn -DskipTests -pl $MAVEN_MODULE clean install
 
