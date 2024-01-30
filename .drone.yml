@@ -12,13 +12,15 @@ steps:
     pull: if-not-exists
     image: maven:3.8.4-openjdk-17
     commands:
-      - mvn jacoco:prepare-agent@preTest surefire:test jacoco:report@postTest
+      - mvn -B test
+      - mvn jacoco:report
 
   - name: java-integration-test
     pull: if-not-exists
     image: docker.io/maven:3.8.4-openjdk-17
     commands:
-      - mvn jacoco:prepare-agent-integration@preIT failsafe:integration-test jacoco:report-integration@postIT failsafe:verify
+      - mvn -B failsafe:integration-test
+      - mvn -B failsafe:verify
 
   - name: docker
     pull: if-not-exists
