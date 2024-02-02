@@ -19,7 +19,7 @@ steps:
 #    commands:
 #      - mvn jacoco:prepare-agent-integration@preIT failsafe:integration-test jacoco:report-integration@postIT failsafe:verify
 
-  - name: Sonar Qube
+  - name: sonar-qube
     image: maven:3.8.4-jdk-11
     commands:
       - mvn sonar:sonar
