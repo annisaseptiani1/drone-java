@@ -7,19 +7,9 @@ steps:
     image: maven:3.8.4-openjdk-17
     commands:
       - mvn -DskipTests=true clean verify
-#  - name: java-unit-test
-#    pull: if-not-exists
-#    image: maven:3.8.4-openjdk-17
-#    commands:
-#      - mvn jacoco:prepare-agent@preTest surefire:test jacoco:report@postTest
-#
-#  - name: java-integration-test
-#    pull: if-not-exists
-#    image: docker.io/maven:3.8.4-openjdk-17
-#    commands:
-#      - mvn jacoco:prepare-agent-integration@preIT failsafe:integration-test jacoco:report-integration@postIT failsafe:verify
 
   - name: sonar-qube
+    pull: if-not-exists
     image: maven:3.8.4-jdk-11
     commands:
       - mvn sonar:sonar
