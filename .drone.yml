@@ -10,7 +10,7 @@ steps:
 
   - name: sonar-qube
     pull: if-not-exists
-    image: maven:3.8.4-jdk-11
+    image: maven:3.8.4-openjdk-11
     commands:
       - mvn sonar:sonar
     environment:
@@ -18,11 +18,7 @@ steps:
     volumes:
       - name: m2
         path: /root/.m2
-    when:
-      event:
-        - push
-        - tag
-
+        
   - name: docker
     pull: if-not-exists
     image: plugins/docker
