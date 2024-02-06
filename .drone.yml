@@ -8,16 +8,23 @@ steps:
     commands:
       - mvn -DskipTests=true clean verify
 
-  - name: sonar-qube
+  - name: sonar scan
     pull: if-not-exists
-    image: maven:3.8.4-openjdk-11
-    commands:
-      - mvn sonar:sonar
+    image: aosapps/drone-sonar-plugin
     environment:
-      TZ: "Asia/Taipei"
-    volumes:
-      - name: m2
-        path: /root/.m2
+      sonar_host:
+        from_secret: sonar_host
+        sonar_token:
+          from_secret: sonar_token
+    commands:
+      - sonar-scanner -Dsonar.projectKey=${DRONE_REPO}
+        -Dsonar.projectName=${DRONE_REPO}
+        -Dsonar.host.url=$sonar_host
+        -Dsonar.login=$sonar_token
+        -Dsonar.tests=src/test/java
+        -Dsonar.sources=src/main/java
+        -Dsonar.java.libraries=./target/classes
+        -Dsonar.java.binaries=./target/classes
         
   - name: docker
     pull: if-not-exists

@@ -115,21 +115,4 @@
 
     </build>
 
-    <profiles>
-        <profile>
-            <id>sonar</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <sonar.host.url>
-                    http://127.0.0.1:9000
-                </sonar.host.url>
-                <sonar.token>
-                    sqa_47f3d9f8820cf3609ced282ad0e4b8bde5671a71
-                </sonar.token>
-            </properties>
-        </profile>
-    </profiles>
-
 </project>
