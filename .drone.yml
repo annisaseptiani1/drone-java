@@ -8,23 +8,13 @@ steps:
     commands:
       - mvn -DskipTests=true clean verify
 
-  - name: sonar scan
-    pull: if-not-exists
+  - name: code-analysis
     image: aosapps/drone-sonar-plugin
-    environment:
+    settings:
       sonar_host:
         from_secret: sonar_host
-        sonar_token:
-          from_secret: sonar_token
-    commands:
-      - sonar-scanner -Dsonar.projectKey=${DRONE_REPO}
-        -Dsonar.projectName=${DRONE_REPO}
-        -Dsonar.host.url=$sonar_host
-        -Dsonar.login=$sonar_token
-        -Dsonar.tests=src/test/java
-        -Dsonar.sources=src/main/java
-        -Dsonar.java.libraries=./target/classes
-        -Dsonar.java.binaries=./target/classes
+      sonar_token:
+        from_secret: sonar_token
         
   - name: docker
     pull: if-not-exists
