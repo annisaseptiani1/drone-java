@@ -115,4 +115,11 @@
 
     </build>
 
+<properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <sonar.language>java</sonar.language>
+    <sonar.sources>src</sonar.sources>
+    <sonar.exclusions>src/test/test.php, src/test/test/*</sonar.exclusions>
+</properties>
+
 </project>
