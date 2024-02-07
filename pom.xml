@@ -23,6 +23,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <sonar.language>java</sonar.language>
+        <sonar.sources>src</sonar.sources>
+        <sonar.exclusions>src/test/test.php, src/test/test/*</sonar.exclusions>
     </properties>
     <dependencies>
         <dependency>
@@ -114,12 +117,5 @@
         </pluginManagement>
 
     </build>
-
-<properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <sonar.language>java</sonar.language>
-    <sonar.sources>src</sonar.sources>
-    <sonar.exclusions>src/test/test.php, src/test/test/*</sonar.exclusions>
-</properties>
 
 </project>
