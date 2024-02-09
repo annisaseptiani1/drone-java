@@ -8,13 +8,17 @@ steps:
     commands:
       - mvn -DskipTests=true clean verify
 
-  - name: code-analysis
-    image: aosapps/drone-sonar-plugin
+  - name: sonar scan
+    image: fmetais/drone-sonar-scan-plugin:latest
     settings:
-      sonar_host:
+      sonar.host.url: 
         from_secret: sonar_host
-      sonar_token:
+      sonar.login: 
         from_secret: sonar_token
+      sonar.project-key: com.example:demo-java
+      sonar.project-name: demo-java
+      sonar.log.level: debug
+      sonar.show-profiling: true
         
   - name: docker
     pull: if-not-exists
