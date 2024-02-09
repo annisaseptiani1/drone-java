@@ -19,8 +19,6 @@ steps:
       sonar.project-name: demo-java
       sonar.log.level: debug
       sonar.show-profiling: true
-    commands:
-      - mvn sonar:sonar
         
   - name: docker
     pull: if-not-exists
