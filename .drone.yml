@@ -15,7 +15,7 @@ steps:
     commands:
       - mvn -DskipTests=true clean verify
       - printenv
-      - ./mvnw sonar:sonar -Dsonar.projectKey=$SONAR_PROJECTKEY -Dsonar.host.url=$SONAR_HOST -Dsonar.token=$SONAR_TOKEN
+      - mvn sonar:sonar -Dsonar.projectKey=$SONAR_PROJECTKEY -Dsonar.host.url=$SONAR_HOST -Dsonar.token=$SONAR_TOKEN
         
   - name: docker
     pull: if-not-exists
