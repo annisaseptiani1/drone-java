@@ -7,18 +7,8 @@ steps:
     image: maven:3.8.4-openjdk-17
     commands:
       - mvn -DskipTests=true clean verify
-
-  - name: sonar scan
-    image: fmetais/drone-sonar-scan-plugin:latest
-    settings:
-      sonar.host.url: 
-        from_secret: sonar_host
-      sonar.login: 
-        from_secret: sonar_token
-      sonar.project-key: com.example:demo-java
-      sonar.project-name: demo-java
-      sonar.log.level: debug
-      sonar.show-profiling: true
+      - printenv
+      - ./mvnw sonar:sonar -Dsonar.projectKey=$SONAR_PROJECTKEY -Dsonar.host.url=$SONAR_HOST -Dsonar.token=$SONAR_TOKEN
         
   - name: docker
     pull: if-not-exists
