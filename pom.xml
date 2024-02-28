@@ -117,5 +117,20 @@
         </pluginManagement>
 
     </build>
+    <profiles>
+         <profile>
+		<id>sonar</id>
+		<activation>
+			<activeByDefault>true</activeByDefault>
+		</activation>
+		<properties>
+			<sonar.host.url>
+				${sonar.host.url}
+			</sonar.host.url>
+		</properties>
+	</profile>
+    </profiles>
+
+
 
 </project>
