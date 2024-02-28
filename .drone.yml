@@ -5,6 +5,13 @@ steps:
   - name: java-build
     pull: if-not-exists
     image: maven:3.8.4-openjdk-17
+    environment:
+      SONAR_TOKEN:
+        from_secret: sonar_token
+      SONAR_HOST:
+        from_secret: sonar_host
+      SONAR_PROJECTKEY:
+        from_secret: sonar_projectkey
     commands:
       - mvn -DskipTests=true clean verify
       - printenv
